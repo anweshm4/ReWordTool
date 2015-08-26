@@ -12,7 +12,7 @@ cosinelesk_answer = []
 
 print "\nSentence Context Disambiguation\n============================== \n"
 
-raw_sentence="Some people are happy this sentence."
+raw_sentence=raw_input("Please enter your sentence : ")
 words = nltk.word_tokenize(raw_sentence)
 print "\nChecking synsets of each word . . .\n==========================================\n"
 print(disambiguate(raw_sentence))
@@ -26,7 +26,7 @@ for eachword in words:
     else:
         print eachword+": "+eachword+"\n"    
         simplelesk_answer.append(eachword)
-""""
+        
         
 print "\nDisambiguating your sentence word by word using Adapted Lesk algorithm. Hold on. \n======================================================"
 
@@ -55,7 +55,7 @@ for eachword in words:
         
 print "Word Definition Comparison\n====================================\n"
     
-for i in range(len(simplelesk_answer)): # assuming the lists are of the same length
+for i in range(len(simplelesk_answer)):  # assuming the lists are of the same length
     print "\n============================================================"
     print "\nWord being compared is: "+words[i]
     if simplelesk_answer[i]==adaptedlesk_answer[i]==cosinelesk_answer[i]:
@@ -80,7 +80,6 @@ for i in range(len(simplelesk_answer)): # assuming the lists are of the same len
         print "\nSimple Lesk Definition: "+simplelesk_answer[i].definition()
         print "\nAdapted Lesk Definition: "+adaptedlesk_answer[i].definition()
         print "\nCosine Lesk Definition: "+cosinelesk_answer[i].definition()
-            
-print "\n====================================================="
-"""
+        print
+
         
