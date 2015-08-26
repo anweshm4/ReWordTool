@@ -1,8 +1,3 @@
-# MainForm.py
-# Author: Amlanjyoti Saikia
-# PartOf: Project ReWord
-# Date: 31/July/2015
-
 from Tkinter import *
 import tkFont
 import tkFileDialog
@@ -43,7 +38,7 @@ class MainForm(Tk):
         self.geometry("900x450")
         self.resizable(width=FALSE, height=FALSE)
         self.title("ReWord Tool")
-        self.iconbitmap(default="PlaceholderIcon.ico")
+        #self.iconbitmap(default="PlaceholderIcon.ico")
         self.center(self)
 
         radio_button = IntVar()

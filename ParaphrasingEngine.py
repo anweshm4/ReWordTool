@@ -1,7 +1,3 @@
-# ParaphrasingEngine.py
-# Author: Amlanjyoti Saikia
-# Date: 03 - Aug - 2015
-
 import nltk
 import pywsd.utils
 import pywsd.lesk

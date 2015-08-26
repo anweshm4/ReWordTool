@@ -1,8 +1,3 @@
-# MainForm.py
-# Author: Amlanjyoti Saikia
-# PartOf: Project ReWord
-# Date: 31/July/2015
-
 from Tkinter import *
 import tkFont
 import tkFileDialog
@@ -25,7 +20,7 @@ class ResultWindow(Tk):
         return
 
     def initialize_ui(self):
-        self.iconbitmap(default="PlaceholderIcon.ico")
+        #self.iconbitmap(default="PlaceholderIcon.ico")
         self.geometry("600x300")
         self.resizable(width=FALSE, height=FALSE)
         text = Text(self, height=17, width=70, wrap=WORD)

@@ -1,8 +1,3 @@
-# MainForm.py
-# Author: Amlanjyoti Saikia
-# PartOf: Project ReWord
-# Date: 31/July/2015
-
 from xml.etree import cElementTree
 from nltk import corpus
 import pywsd.utils
