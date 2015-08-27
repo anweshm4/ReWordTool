@@ -38,7 +38,8 @@ class MainForm(Tk):
         self.geometry("900x450")
         self.resizable(width=FALSE, height=FALSE)
         self.title("ReWord Tool")
-        #self.iconbitmap(default="PlaceholderIcon.ico")
+        # self.iconbitmap(default="PlaceholderIcon.ico") # Maybe jpeg will work? Will test.
+        # Breaks platfrom independence as it is yes.
         self.center(self)
 
         radio_button = IntVar()
@@ -68,7 +69,7 @@ class MainForm(Tk):
         label_file.place(x=x_pos, y=y_pos)
 
         x_pos += 90
-        entry_file_location = Entry(self, width=90)
+        entry_file_location = Entry(self, width=60)
         entry_file_location.config(state="disabled", bg='grey')
         entry_file_location.place(x=x_pos, y=y_pos)
 
@@ -82,7 +83,7 @@ class MainForm(Tk):
         x_pos = 15
         y_pos += 35
         label_frame = LabelFrame(self, text="Select algorithm(s): ")
-        label_frame.place(x=x_pos, y=y_pos, width=420, height=60)
+        label_frame.place(x=x_pos, y=y_pos, width=600, height=60)
 
         y_pos += 20
         x_pos += 10
@@ -96,7 +97,7 @@ class MainForm(Tk):
         check_original.place(x=x_pos, y=y_pos)
         check_original.config(state="disabled")
 
-        x_pos += 100
+        x_pos += 150
         check_simple_var = IntVar()
         check_simple = Checkbutton(self,
                                    variable=check_simple_var,
@@ -106,7 +107,7 @@ class MainForm(Tk):
                                    )
         check_simple.place(x=x_pos, y=y_pos)
 
-        x_pos += 100
+        x_pos += 150
         check_adapted_var = IntVar()
         check_adapted = Checkbutton(self,
                                     variable=check_adapted_var,
@@ -116,7 +117,7 @@ class MainForm(Tk):
                                     )
         check_adapted.place(x=x_pos, y=y_pos)
 
-        x_pos += 100
+        x_pos += 150
         check_cosine_var = IntVar()
         check_cosine = Checkbutton(self,
                                    variable=check_cosine_var,

@@ -19,11 +19,8 @@ class ParaphrasingEngine:
     def __init__(self, input_string):
         self.input = input_string
         print "Breaking input into words..."
-        # self.words = nltk.word_tokenize(self.input.translate(string.maketrans("",""), string.punctuation))
-        # self.words = nltk.word_tokenize(self.input.translate(None, string.punctuation))
+        # Break into words. Remove punctuation.
         self.words = nltk.word_tokenize(str(self.input).translate(None, string.punctuation))
-        # print "\nChecking synsets of each word . . ."
-        # print (pywsd.disambiguate(self.input))
         return
 
     def disambiguate_original_lesk(self):
