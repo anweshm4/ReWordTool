@@ -1,10 +1,4 @@
 from Tkinter import *
-import tkFont
-import tkFileDialog
-import tkMessageBox
-import os
-import pywsd.utils
-
 
 class ResultWindow(Tk):
 
@@ -20,7 +14,8 @@ class ResultWindow(Tk):
         return
 
     def initialize_ui(self):
-        #self.iconbitmap(default="PlaceholderIcon.ico")
+        # self.iconbitmap(default="PlaceholderIcon.ico")
+        # Breaks portability. Can't use this. Will look for workaround.
         self.geometry("600x300")
         self.resizable(width=FALSE, height=FALSE)
         text = Text(self, height=17, width=70, wrap=WORD)
