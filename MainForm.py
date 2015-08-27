@@ -73,9 +73,9 @@ class MainForm(Tk):
         entry_file_location.config(state="disabled", bg='grey')
         entry_file_location.place(x=x_pos, y=y_pos)
 
-        x_pos += 555
+        x_pos += 500
         y_pos -= 5
-        button_file_location = Button(self, text="Browse", command=self.select_file, width=30)
+        button_file_location = Button(self, text="Browse", command=self.select_file, width=25)
         button_file_location.config(state="disabled")
         button_file_location.place(x=x_pos, y=y_pos)
         y_pos += 5
