@@ -240,6 +240,11 @@ class MainForm(Tk):
                     return False
                 else:
                     print("OK: File isn't empty.")
+                    file = open(text, "r")
+                    text = file.read()
+                    file.close()
+
+        print(text)
 
         if MainForm.correct_spelling(text):
             print("OK: No spelling errors.")
@@ -271,14 +276,18 @@ class MainForm(Tk):
 
     # TODO: Write method
     def proceed_pressed(self):
-        global radio_button, text_input
+        global radio_button, text_input, entry_file_location
         global check_original_var, check_simple_var, check_adapted_var, check_cosine_var
 
         if self.validate():
-            if radio_button.get():
+            if radio_button.get() == 1:
                 input_string = text_input.get("1.0", END)
             else:
-                input_string = None
+                location = entry_file_location.get()
+                file_object = open(location, "r")
+                input_string = file_object.read()
+                file_object.close()
+                print("INPUT: " + location)
 
             pe = ParaphrasingEngine(input_string)
             print "Words: "
