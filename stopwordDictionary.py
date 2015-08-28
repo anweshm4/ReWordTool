@@ -1,16 +1,37 @@
 import csv
-import sys  
+# import sys
 
-reload(sys)  
-sys.setdefaultencoding('utf8')
+#  reload(sys)
+#  sys.setdefaultencoding('utf8')  # seems redundant as of now.
 
 
-with open('haveNoSense.csv', 'rb') as csvfile:
-    reader = csv.reader(csvfile, delimiter=':')
-    for row in reader:
-        if word == row[0]: # if the word shall be on column 1 (-> index 0)
-            print "Found!"
-            print ' : '.join(row)
-            break;
-        else:
-            print "Not Found"
+class StopWordDictionary:
+
+    reader = csv_file = None
+
+    def __init__(self):
+        self.csv_file = open('StopwordDefinitions.csv')  # Open the file
+        self.reader = csv.reader(self.csv_file, delimiter=':')  # Create _csv.reader object
+        return
+
+    def has_sense(self, word):  # Returns true if dictionary contains a definition
+        for row in self.reader:  # Iterate through each line
+            if word == row[0]:  # If word matches key
+                self.csv_file.seek(0)  # Reset file to start
+                return True  # Definition found, return true
+        return False  # Nothing found, return false
+
+    def get_sense(self, word):  # Returns the definition of the word
+        for row in self.reader:  # Iterate through each line
+            if word == row[0]:  # If word matches key
+                self.csv_file.seek(0)  # Reset file to start
+                return row[1]  # Return definition
+
+
+# USAGE EXAMPLE
+# stDict = StopWordDictionary()
+
+# if stDict.has_sense("myasdasdasd"):
+#    print stDict.get_sense("myasdasdasdasd")
+# else:
+#    print "Nothing found!"

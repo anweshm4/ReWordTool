@@ -12,6 +12,7 @@ from ResultWindow import ResultWindow
 
 class MainForm(Tk):
 
+    # Declaration of controls
     radio_button = radio_enter_text = radio_select_file = text_input = label_file = None
     entry_file_location = button_file_location = label_frame = None
     check_original_var = check_simple_var = check_adapted_var = check_cosine_var = None
@@ -19,9 +20,8 @@ class MainForm(Tk):
     button_proceed = button_cancel = None
 
     def __init__(self):
-        Tk.__init__(self)
-        self.initialize_form()
-        ResultWindow("TEST", None)
+        Tk.__init__(self)  # Initialize parent class.
+        self.initialize_form()  # Initialize controls.
         return
 
     def initialize_form(self):
@@ -33,19 +33,19 @@ class MainForm(Tk):
 
         print("Reword tool UI")
 
-        x_pos = 15
+        x_pos = 15  # Markers that we will manipulate to position items
         y_pos = 15
-        self.geometry("900x450")
-        self.resizable(width=FALSE, height=FALSE)
-        self.title("ReWord Tool")
+        self.geometry("900x450")  # Set size
+        self.resizable(width=FALSE, height=FALSE)  # Make window of fixed size
+        self.title("ReWord Tool")  # Set title
         # self.iconbitmap(default="PlaceholderIcon.ico") # Maybe jpeg will work? Will test.
-        # Breaks platfrom independence as it is yes.
-        self.center(self)
+        # Breaks platform independence as it is now.
+        self.center(self)  # Place window in the center of the form. NOT an inbuilt method.
 
-        radio_button = IntVar()
+        radio_button = IntVar()  # See http://effbot.org/tkinterbook/variable.htm
         radio_enter_text = Radiobutton(self,
-                                       variable=radio_button,
-                                       value=1,
+                                       variable=radio_button,  # variable indicates which radio button was pressed
+                                       value=1,  # this button, when pressed will hold a value of 1
                                        text="Enter text",
                                        command=self.radio_check_changed
                                        )
@@ -58,7 +58,7 @@ class MainForm(Tk):
         y_pos += 180
         radio_select_file = Radiobutton(self,
                                         variable=radio_button,
-                                        value=2,
+                                        value=2,  # when pressed this button will hold a value of 2
                                         text="Select file",
                                         command=self.radio_check_changed
                                         )
