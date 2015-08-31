@@ -14,7 +14,7 @@ Screenshot :
 
 ## Work Flow ##
 
-* misspelt
+* misspelt [Don't process Proper nouns]
 * stopword: Get definition from custom dictionary
 
 ## Stopwords ##
