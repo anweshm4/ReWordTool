@@ -85,5 +85,5 @@ class ParaphrasingEngine:
     def process_stop_word(self, word):
         if self.stop_word_dict.has_sense(word):
             return self.stop_word_dict.get_sense(word)
-        else:/f
+        else:
             return word
