@@ -8,6 +8,7 @@ import string
 import nltk
 from ParaphrasingEngine import ParaphrasingEngine
 from ResultWindow import ResultWindow
+from StopwordDictionary import StopWordDictionary
 
 
 class MainForm(Tk):
@@ -18,6 +19,7 @@ class MainForm(Tk):
     check_original_var = check_simple_var = check_adapted_var = check_cosine_var = None
     check_original = check_simple = check_adapted = check_cosine = None
     button_proceed = button_cancel = None
+    stop_word_dictionary = None
 
     def __init__(self):
         Tk.__init__(self)  # Initialize parent class.
@@ -30,6 +32,7 @@ class MainForm(Tk):
         global check_original_var, check_simple_var, check_adapted_var, check_cosine_var
         global check_original, check_simple, check_adapted, check_cosine
         global button_proceed, button_cancel
+        self.stop_word_dictionary = StopWordDictionary()
 
         print("Reword tool UI")
 
@@ -289,7 +292,7 @@ class MainForm(Tk):
                 file_object.close()
                 print("INPUT: " + location)
 
-            pe = ParaphrasingEngine(input_string)
+            pe = ParaphrasingEngine(input_string, self.stop_word_dictionary)
             print "Words: "
             print pe.words
 
