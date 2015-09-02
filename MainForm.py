@@ -243,9 +243,9 @@ class MainForm(Tk):
                     return False
                 else:
                     print("OK: File isn't empty.")
-                    file = open(text, "r")
-                    text = file.read()
-                    file.close()
+                    input_file = open(text, "r")
+                    text = input_file.read()
+                    input_file.close()
 
         print(text)
 

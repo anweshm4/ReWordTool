@@ -8,9 +8,9 @@ Screenshot :
 # PREPROCESSING #
 ## Don't process ##
 * Proper nouns
-* Pronouns [Done]
+* Pronouns
 * Single/double letters words
-* Misspelt Words [Done]
+* Misspelt Words
 
 ## Work Flow ##
 

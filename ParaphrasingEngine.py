@@ -29,7 +29,7 @@ class ParaphrasingEngine:
                 print each_word+": "+answer.definition()+"\n"
             else:
                 temp = each_word
-                each_word = self.process_stop_word(each_word) #TODO: Link this with the stopwords dictionary
+                each_word = self.process_stop_word(each_word)  # TODO: Link this with the stopwords dictionary
                 print temp+": "+each_word+"\n"
                 original_answer.append(each_word) # append word if no sense found
         return original_answer
@@ -45,7 +45,7 @@ class ParaphrasingEngine:
                 print each_word+": "+answer.definition()+"\n"
             else:
                 temp = each_word
-                each_word = self.process_stop_word(each_word) #TODO: Link this with the stopwords dictionary
+                each_word = self.process_stop_word(each_word)  # TODO: Link this with the stopwords dictionary
                 print temp+": "+each_word+"\n"
                 simple_answer.append(each_word)
         return simple_answer
@@ -61,7 +61,7 @@ class ParaphrasingEngine:
                 print each_word+": "+answer.definition()+"\n"
             else:
                 temp = each_word
-                each_word = self.process_stop_word(each_word) #TODO: Link this with the stopwords dictionary
+                each_word = self.process_stop_word(each_word)  # TODO: Link this with the stopwords dictionary
                 print temp+": "+each_word+"\n"
                 adapted_answer.append(each_word)
         return adapted_answer
@@ -77,13 +77,14 @@ class ParaphrasingEngine:
                 print each_word+": "+answer.definition()+"\n"
             else:
                 temp = each_word
-                each_word = self.process_stop_word(each_word) #TODO: Link this with the stopwords dictionary
+                each_word = self.process_stop_word(each_word)  # TODO: Link this with the stopwords dictionary
                 print temp+": "+each_word+"\n"
                 cosine_answer.append(each_word)
         return cosine_answer
 
-    def process_stop_word(self, word):
-        if self.stop_word_dict.has_sense(word):
+    def process_stop_word(self, word):  # Process word if it is a stop word
+        if self.stop_word_dict.has_sense(word):  # If it is a stop word, return the sense
+            print "Stop word has sense: " + word
             return self.stop_word_dict.get_sense(word)
         else:
-            return word
+            return word  # else, return the original word.
