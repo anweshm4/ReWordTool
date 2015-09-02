@@ -88,4 +88,3 @@ class ParaphrasingEngine:
             return self.stop_word_dict.get_sense(word)
         else:
             return word  # else, return the original word.
-
