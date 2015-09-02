@@ -82,8 +82,10 @@ class ParaphrasingEngine:
                 cosine_answer.append(each_word)
         return cosine_answer
 
-    def process_stop_word(self, word):
-        if self.stop_word_dict.has_sense(word):
+    def process_stop_word(self, word):  # Process word if it is a stopword
+        print "Processing stop word: " + word
+        if self.stop_word_dict.has_sense(word):  # If it is a stop word, return the sense
             return self.stop_word_dict.get_sense(word)
-        else:/f
-            return word
+        else:
+            return word  # else, return the original word.
+
