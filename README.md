@@ -15,7 +15,7 @@ Screenshot :
 ## Work Flow ##
 
 * misspelt [Don't process Proper nouns]
-* stopword: Get definition from custom dictionary
+* stopword: Get definition from StopWords dictionary
 
 ## Stopwords [Done] ##
 * Read stopwords and create dictionary
