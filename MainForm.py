@@ -319,13 +319,17 @@ class MainForm(Tk):
     def correct_spelling(input_text):
         words = nltk.word_tokenize(str(input_text).translate(None, string.punctuation))
         dict_en_us = enchant.Dict("en_US")
+        dict_en_uk = enchant.Dict("en_UK")
 
         correct = True
 
         for each_word in words:
-            if not dict_en_us.check(each_word):
-                correct = False
+            if not each_word[0].isupper():
+                # If doesn't start with a upper case
+                if (not dict_en_us.check(each_word)) and (not dict_en_uk.check(each_word)):
+                    # if not present in US and UK dictionaries
+                    correct = False
+                    break
         return correct
-
 
 MainForm()
