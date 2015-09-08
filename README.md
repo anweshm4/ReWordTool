@@ -8,16 +8,16 @@ Screenshot :
 # PREPROCESSING #
 ## Don't process ##
 * Proper nouns
-* Pronouns
+* Pronouns [Done] 
 * Single/double letters words
-* Misspelt Words
+* Misspelt Words [Done]
 
 ## Work Flow ##
 
 * misspelt [Don't process Proper nouns]
-* stopword: Get definition from custom dictionary
+* stopword: Get definition from StopWords dictionary
 
-## Stopwords ##
+## Stopwords [Done] ##
 * Read stopwords and create dictionary
 * Check if stopword is there in dictionary
 * Load definition from dictionary
