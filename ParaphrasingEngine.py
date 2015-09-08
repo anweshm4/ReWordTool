@@ -24,10 +24,10 @@ class ParaphrasingEngine:
         for each_word in self.words:
             if pywsd.utils.has_synset(each_word):  # if word has sense
                 answer = pywsd.lesk.original_lesk(self.input, each_word)  # get sense using pywsd library
-                original_answer.append(answer) # append sense of each word
+                original_answer.append(answer)  # append sense of each word
                 print "Sense: ", answer
                 print each_word+": "+answer.definition()+"\n"
-            else:
+            else:  # If it doesn't have a
                 temp = each_word
                 each_word = self.process_stop_word(each_word)  # TODO: Link this with the stopwords dictionary
                 print temp+": "+each_word+"\n"

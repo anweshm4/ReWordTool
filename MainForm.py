@@ -27,11 +27,11 @@ class MainForm(Tk):
         return
 
     def initialize_form(self):
-        global radio_button, radio_enter_text, radio_select_file, text_input, label_file
-        global entry_file_location, button_file_location, label_frame
-        global check_original_var, check_simple_var, check_adapted_var, check_cosine_var
-        global check_original, check_simple, check_adapted, check_cosine
-        global button_proceed, button_cancel
+        # global radio_button, radio_enter_text, radio_select_file, text_input, label_file
+        # global entry_file_location, button_file_location, label_frame
+        # global check_original_var, check_simple_var, check_adapted_var, check_cosine_var
+        # global check_original, check_simple, check_adapted, check_cosine
+        # global button_proceed, button_cancel
         self.stop_word_dictionary = StopWordDictionary()
 
         print("Reword tool UI")
@@ -45,104 +45,103 @@ class MainForm(Tk):
         # Breaks platform independence as it is now.
         self.center()  # Place window in the center of the form. NOT an inbuilt method.
 
-        radio_button = IntVar()  # See http://effbot.org/tkinterbook/variable.htm
-        radio_enter_text = Radiobutton(self,
-                                       variable=radio_button,  # variable indicates which radio button was pressed
-                                       value=1,  # this button, when pressed will hold a value of 1
-                                       text="Enter text",
-                                       command=self.radio_check_changed
-                                       )
-        radio_enter_text.place(x=x_pos, y=y_pos)
+        self.radio_button = IntVar()  # See http://effbot.org/tkinterbook/variable.htm
+        self.radio_enter_text = Radiobutton(self, variable=self.radio_button,  # variable indicates which radio button was pressed
+                                            value=1,  # this button, when pressed will hold a value of 1
+                                            text="Enter text",
+                                            command=self.radio_check_changed
+                                            )
+        self.radio_enter_text.place(x=x_pos, y=y_pos)
 
         y_pos += 35
-        text_input = Text(self, height=10, width=108, wrap=WORD)
-        text_input.place(x=x_pos, y=y_pos)
+        self.text_input = Text(self, height=10, width=108, wrap=WORD)
+        self.text_input.place(x=x_pos, y=y_pos)
 
         y_pos += 180
-        radio_select_file = Radiobutton(self,
-                                        variable=radio_button,
-                                        value=2,  # when pressed this button will hold a value of 2
-                                        text="Select file",
-                                        command=self.radio_check_changed
-                                        )
-        radio_select_file.place(x=x_pos, y=y_pos)
+        self.radio_select_file = Radiobutton(self,
+                                             variable=self.radio_button,
+                                             value=2,  # when pressed this button will hold a value of 2
+                                             text="Select file",
+                                             command=self.radio_check_changed
+                                             )
+        self.radio_select_file.place(x=x_pos, y=y_pos)
 
         y_pos += 35
-        label_file = Label(self, text="File Location: ")
-        label_file.place(x=x_pos, y=y_pos)
+        self.label_file = Label(self, text="File Location: ")
+        self.label_file.place(x=x_pos, y=y_pos)
 
         x_pos += 90
-        entry_file_location = Entry(self, width=60)
-        entry_file_location.config(state="disabled", bg='grey')
-        entry_file_location.place(x=x_pos, y=y_pos)
+        self.entry_file_location = Entry(self, width=60)
+        self.entry_file_location.config(state="disabled", bg='grey')
+        self.entry_file_location.place(x=x_pos, y=y_pos)
 
         x_pos += 500
         y_pos -= 5
-        button_file_location = Button(self, text="Browse", command=self.select_file, width=25)
-        button_file_location.config(state="disabled")
-        button_file_location.place(x=x_pos, y=y_pos)
+        self.button_file_location = Button(self, text="Browse", command=self.select_file, width=25)
+        self.button_file_location.config(state="disabled")
+        self.button_file_location.place(x=x_pos, y=y_pos)
         y_pos += 5
 
         x_pos = 15
         y_pos += 35
-        label_frame = LabelFrame(self, text="Select algorithm(s): ")
-        label_frame.place(x=x_pos, y=y_pos, width=600, height=60)
+        self.label_frame = LabelFrame(self, text="Select algorithm(s): ")
+        self.label_frame.place(x=x_pos, y=y_pos, width=600, height=60)
 
         y_pos += 20
         x_pos += 10
-        check_original_var = IntVar()
-        check_original = Checkbutton(self,
-                                     variable=check_original_var,
-                                     onvalue=1,
-                                     offvalue=0,
-                                     text="Original Lesk"
-                                     )
-        check_original.place(x=x_pos, y=y_pos)
-        check_original.config(state="disabled")
+        self.check_original_var = IntVar()
+        self.check_original = Checkbutton(self,
+                                          variable=self.check_original_var,
+                                          onvalue=1,
+                                          offvalue=0,
+                                          text="Original Lesk"
+                                          )
+        self.check_original.place(x=x_pos, y=y_pos)
+        self.check_original.config(state="disabled")
 
         x_pos += 150
-        check_simple_var = IntVar()
-        check_simple = Checkbutton(self,
-                                   variable=check_simple_var,
-                                   onvalue=1,
-                                   offvalue=0,
-                                   text="Simple Lesk"
-                                   )
-        check_simple.place(x=x_pos, y=y_pos)
+        self.check_simple_var = IntVar()
+        self.check_simple = Checkbutton(self,
+                                        variable=self.check_simple_var,
+                                        onvalue=1,
+                                        offvalue=0,
+                                        text="Simple Lesk"
+                                        )
+        self.check_simple.place(x=x_pos, y=y_pos)
 
         x_pos += 150
-        check_adapted_var = IntVar()
-        check_adapted = Checkbutton(self,
-                                    variable=check_adapted_var,
-                                    onvalue=1,
-                                    offvalue=0,
-                                    text="Adapted Lesk"
-                                    )
-        check_adapted.place(x=x_pos, y=y_pos)
+        self.check_adapted_var = IntVar()
+        self.check_adapted = Checkbutton(self,
+                                         variable=self.check_adapted_var,
+                                         onvalue=1,
+                                         offvalue=0,
+                                         text="Adapted Lesk"
+                                        )
+        self.check_adapted.place(x=x_pos, y=y_pos)
 
         x_pos += 150
-        check_cosine_var = IntVar()
-        check_cosine = Checkbutton(self,
-                                   variable=check_cosine_var,
-                                   onvalue=1,
-                                   offvalue=0,
-                                   text="Cosine Lesk"
-                                   )
-        check_cosine.place(x=x_pos, y=y_pos)
+        self.check_cosine_var = IntVar()
+        self.check_cosine = Checkbutton(self,
+                                        variable=self.check_cosine_var,
+                                        onvalue=1,
+                                        offvalue=0,
+                                        text="Cosine Lesk"
+                                        )
+        self.check_cosine.place(x=x_pos, y=y_pos)
 
         x_pos = 15
         y_pos += 65
         font_big = tkFont.Font(size=14)
-        button_proceed = Button(self, text="Proceed", font=font_big, command=self.proceed_pressed)
-        button_proceed.place(x=x_pos, y=y_pos, height=50, width=400)
+        self.button_proceed = Button(self, text="Proceed", font=font_big, command=self.proceed_pressed)
+        self.button_proceed.place(x=x_pos, y=y_pos, height=50, width=400)
 
         x_pos += 460
-        button_cancel = Button(self, text="Cancel", font=font_big, command=self.cancel_pressed)
-        button_cancel.place(x=x_pos, y=y_pos, height=50, width=400)
+        self.button_cancel = Button(self, text="Cancel", font=font_big, command=self.cancel_pressed)
+        self.button_cancel.place(x=x_pos, y=y_pos, height=50, width=400)
 
-        radio_select_file.deselect()
-        radio_enter_text.select()
-        text_input.delete(INSERT, END)
+        self.radio_select_file.deselect()
+        self.radio_enter_text.select()
+        self.text_input.delete(INSERT, END)
         print "UI Initiation complete."
         self.mainloop()
         print "Exiting..."
@@ -204,7 +203,6 @@ class MainForm(Tk):
         # global check_original_var, check_simple_var, check_adapted_var, check_cosine_var
 
         if self.radio_button.get() == 1:
-
             print("INFO: Checking input text.")
             text = self.text_input.get("1.0", END)
 
@@ -251,7 +249,7 @@ class MainForm(Tk):
             tkMessageBox.showerror("Error", "Text has spelling errors or unknown words.")
             return False
 
-        if check_original_var.get() or check_simple_var.get() or check_adapted_var.get() or check_cosine_var.get():
+        if self.check_original_var.get() or self.check_simple_var.get() or self.check_adapted_var.get() or self.check_cosine_var.get():
             print "OK: At least one algorithm selected"
         else:
             print "ERROR: No algorithm selected"
