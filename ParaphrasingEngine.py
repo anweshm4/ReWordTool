@@ -22,8 +22,8 @@ class ParaphrasingEngine:
         print "\nINFO: Disambiguating via original lesk...\n============================== \n"
         original_answer = []
         for each_word in self.words:
-            if pywsd.utils.has_synset(each_word): # if word has sense
-                answer = pywsd.lesk.original_lesk(self.input, each_word) # get sense using pywsd library
+            if pywsd.utils.has_synset(each_word):  # if word has sense
+                answer = pywsd.lesk.original_lesk(self.input, each_word)  # get sense using pywsd library
                 original_answer.append(answer) # append sense of each word
                 print "Sense: ", answer
                 print each_word+": "+answer.definition()+"\n"
@@ -31,7 +31,7 @@ class ParaphrasingEngine:
                 temp = each_word
                 each_word = self.process_stop_word(each_word)  # TODO: Link this with the stopwords dictionary
                 print temp+": "+each_word+"\n"
-                original_answer.append(each_word) # append word if no sense found
+                original_answer.append(each_word)  # append word if no sense found
         return original_answer
 
     def disambiguate_simple_lesk(self):  # Same as above
@@ -66,7 +66,7 @@ class ParaphrasingEngine:
                 adapted_answer.append(each_word)
         return adapted_answer
 
-    def disambiguate_cosine_lesk(self): # Same as above
+    def disambiguate_cosine_lesk(self):  # Same as above
         print "\nINFO: Disambiguating via cosine lesk......\n============================== \n"
         cosine_answer = []
         for each_word in self.words:

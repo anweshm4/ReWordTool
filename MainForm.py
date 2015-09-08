@@ -43,7 +43,7 @@ class MainForm(Tk):
         self.title("ReWord Tool")  # Set title
         # self.iconbitmap(default="PlaceholderIcon.ico") # Maybe jpeg will work? Will test.
         # Breaks platform independence as it is now.
-        self.center(self)  # Place window in the center of the form. NOT an inbuilt method.
+        self.center()  # Place window in the center of the form. NOT an inbuilt method.
 
         radio_button = IntVar()  # See http://effbot.org/tkinterbook/variable.htm
         radio_enter_text = Radiobutton(self,
@@ -150,44 +150,41 @@ class MainForm(Tk):
 
         return
 
-    @staticmethod
-    def center(win):
+    def center(self):
         """
         centers a tkinter window
-        :param win: the root or Toplevel window to center
+        :param self: the root or Toplevel window to center
         """
-        win.update_idletasks()
-        width = win.winfo_width()
-        frm_width = win.winfo_rootx() - win.winfo_x()
+        self.update_idletasks()
+        width = self.winfo_width()
+        frm_width = self.winfo_rootx() - self.winfo_x()
         win_width = width + 2 * frm_width
-        height = win.winfo_height()
-        titlebar_height = win.winfo_rooty() - win.winfo_y()
+        height = self.winfo_height()
+        titlebar_height = self.winfo_rooty() - self.winfo_y()
         win_height = height + titlebar_height + frm_width
-        x = win.winfo_screenwidth() // 2 - win_width // 2
-        y = win.winfo_screenheight() // 2 - win_height // 2
-        win.geometry('{}x{}+{}+{}'.format(width, height, x, y))
-        win.deiconify()
+        x = self.winfo_screenwidth() // 2 - win_width // 2
+        y = self.winfo_screenheight() // 2 - win_height // 2
+        self.geometry('{}x{}+{}+{}'.format(width, height, x, y))
+        self.deiconify()
         return
 
-    @staticmethod
-    def radio_check_changed():
-        global radio_button, button_file_location, entry_file_location, text_input
+    def radio_check_changed(self):
+        # global radio_button, button_file_location, entry_file_location, text_input
 
-        if radio_button.get() == 1:
+        if self.radio_button.get() == 1:
             print "Enter text mode:"
-            button_file_location.config(state="disabled")
-            text_input.config(state="normal")
-            entry_file_location.config(state="disabled")
+            self.button_file_location.config(state="disabled")
+            self.text_input.config(state="normal")
+            self.entry_file_location.config(state="disabled")
         else:
             print "Open file mode:"
-            button_file_location.config(state="normal")
-            text_input.config(state="disabled")
-            entry_file_location.config(state="normal")
+            self.button_file_location.config(state="normal")
+            self.text_input.config(state="disabled")
+            self.entry_file_location.config(state="normal")
         return
 
-    @staticmethod
-    def select_file():
-        global entry_file_location
+    def select_file(self):
+        # global entry_file_location
         print "File open dialog box."
 
         options = {'defaultextension': '.txt',
@@ -197,21 +194,19 @@ class MainForm(Tk):
 
         print("File selected: " + file_name)
         if file_name != '':
-            entry_file_location.delete(0, END)
-            entry_file_location.insert(0, file_name)
+            self.entry_file_location.delete(0, END)
+            self.entry_file_location.insert(0, file_name)
         return
 
-    # TODO: Write method
-    @staticmethod
-    def validate():
+    def validate(self):
         print "Validating form"
-        global radio_button, button_file_location, entry_file_location, text_input
-        global check_original_var, check_simple_var, check_adapted_var, check_cosine_var
+        # global radio_button, button_file_location, entry_file_location, text_input
+        # global check_original_var, check_simple_var, check_adapted_var, check_cosine_var
 
-        if radio_button.get() == 1:
+        if self.radio_button.get() == 1:
 
             print("INFO: Checking input text.")
-            text = text_input.get("1.0", END)
+            text = self.text_input.get("1.0", END)
 
             if text == '' or text == '\n':
                 print("ERROR: Text absent.")
@@ -221,7 +216,7 @@ class MainForm(Tk):
                 print("OK: Text present.")
         else:
             print("INFO: Checking input file.")
-            text = entry_file_location.get()
+            text = self.entry_file_location.get()
 
             if text == '':
                 print("ERROR: No file name given.")
@@ -265,28 +260,15 @@ class MainForm(Tk):
 
         return True
 
-    @staticmethod
-    def correct_spelling(input_text):
-        words = nltk.word_tokenize(str(input_text).translate(None, string.punctuation))
-        dict_en_us = enchant.Dict("en_US")
-
-        correct = True
-
-        for each_word in words:
-            if not dict_en_us.check(each_word):
-                correct = False
-        return correct
-
-    # TODO: Write method
     def proceed_pressed(self):
-        global radio_button, text_input, entry_file_location
-        global check_original_var, check_simple_var, check_adapted_var, check_cosine_var
+        # global radio_button, text_input, entry_file_location
+        # global check_original_var, check_simple_var, check_adapted_var, check_cosine_var
 
         if self.validate():
-            if radio_button.get() == 1:
-                input_string = text_input.get("1.0", END)
+            if self.radio_button.get() == 1:
+                input_string = self.text_input.get("1.0", END)
             else:
-                location = entry_file_location.get()
+                location = self.entry_file_location.get()
                 file_object = open(location, "r")
                 input_string = file_object.read()
                 file_object.close()
@@ -298,19 +280,19 @@ class MainForm(Tk):
 
             original_result = simple_result = adapted_result = cosine_result = None
 
-            if check_original_var.get():
+            if self.check_original_var.get():
                 original_result = pe.disambiguate_original_lesk()
-                ResultWindow("Original Lesk",pe.words, original_result)
+                ResultWindow("Original Lesk", pe.words, original_result)
 
-            if check_simple_var.get():
+            if self.check_simple_var.get():
                 simple_result = pe.disambiguate_simple_lesk()
                 ResultWindow("Simple Lesk", pe.words, simple_result)
 
-            if check_adapted_var.get():
+            if self.check_adapted_var.get():
                 adapted_result = pe.disambiguate_adapted_lesk()
                 ResultWindow("Adapted Lesk", pe.words, adapted_result)
 
-            if check_cosine_var.get():
+            if self.check_cosine_var.get():
                 cosine_result = pe.disambiguate_cosine_lesk()
                 ResultWindow("Cosine Lesk", pe.words, cosine_result)
 
@@ -328,12 +310,24 @@ class MainForm(Tk):
 
         return
 
-    # TODO: Write method
     @staticmethod
     def cancel_pressed():
         if tkMessageBox.askquestion("Confirm exit", "Are you sure you want to exit?", icon="question") == 'yes':
             print("Exiting...")
             exit(0)
         return
+
+    @staticmethod
+    def correct_spelling(input_text):
+        words = nltk.word_tokenize(str(input_text).translate(None, string.punctuation))
+        dict_en_us = enchant.Dict("en_US")
+
+        correct = True
+
+        for each_word in words:
+            if not dict_en_us.check(each_word):
+                correct = False
+        return correct
+
 
 MainForm()
