@@ -26,8 +26,8 @@ class ResultWindow(Tk):
             definition += ": "
             print(self.answer[i])
             try:
-                definition += self.answer[i].definition()  # TODO: Throws exception if there is no definition
-            except AttributeError:
+                definition += self.answer[i].definition()
+            except AttributeError:   # TODO: This is redundant.We already provide definitions for stopwords and such.
                 definition += self.answer[i]
             definition += "\n\n"
             text.insert(END, definition)

@@ -29,7 +29,7 @@ class ParaphrasingEngine:
                 print each_word+": "+answer.definition()+"\n"
             else:  # If it doesn't have a
                 temp = each_word
-                each_word = self.process_stop_word(each_word)  # TODO: Link this with the stopwords dictionary
+                each_word = self.process_stop_word(each_word)
                 print temp+": "+each_word+"\n"
                 original_answer.append(each_word)  # append word if no sense found
         return original_answer
@@ -45,7 +45,7 @@ class ParaphrasingEngine:
                 print each_word+": "+answer.definition()+"\n"
             else:
                 temp = each_word
-                each_word = self.process_stop_word(each_word)  # TODO: Link this with the stopwords dictionary
+                each_word = self.process_stop_word(each_word)
                 print temp+": "+each_word+"\n"
                 simple_answer.append(each_word)
         return simple_answer
@@ -61,7 +61,7 @@ class ParaphrasingEngine:
                 print each_word+": "+answer.definition()+"\n"
             else:
                 temp = each_word
-                each_word = self.process_stop_word(each_word)  # TODO: Link this with the stopwords dictionary
+                each_word = self.process_stop_word(each_word)
                 print temp+": "+each_word+"\n"
                 adapted_answer.append(each_word)
         return adapted_answer
@@ -77,7 +77,7 @@ class ParaphrasingEngine:
                 print each_word+": "+answer.definition()+"\n"
             else:
                 temp = each_word
-                each_word = self.process_stop_word(each_word)  # TODO: Link this with the stopwords dictionary
+                each_word = self.process_stop_word(each_word)
                 print temp+": "+each_word+"\n"
                 cosine_answer.append(each_word)
         return cosine_answer
