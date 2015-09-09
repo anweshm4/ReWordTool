@@ -100,7 +100,7 @@ class DifferenceWindow(Tk):
                 self.sense_1 = self.simple_answer
                 self.sense_2 = self.adapted_answer
                 self.sense_3 = self.cosine_answer
-                self.title("Differences - Simple Lesk, Adapted Lesk and Cosine Lesk")
+                self.title("Comparison - Simple Lesk, Adapted Lesk and Cosine Lesk")
                 self.setup_three_panes()
         elif self.has_two_sense_sets():
             if self.has_simple_sense() and self.has_adapted_sense():
@@ -109,7 +109,7 @@ class DifferenceWindow(Tk):
                 else:
                     self.sense_1 = self.simple_answer
                     self.sense_2 = self.adapted_answer
-                    self.title("Differences - Simple Lesk and Adapted Lesk")
+                    self.title("Comparison - Simple Lesk and Adapted Lesk")
                     self.setup_two_panes()
             if self.has_simple_sense() and self.has_cosine_sense():
                 if DifferenceWindow.same_senses_two(self.simple_answer, self.cosine_answer):
@@ -117,7 +117,7 @@ class DifferenceWindow(Tk):
                 else:
                     self.sense_1 = self.simple_answer
                     self.sense_2 = self.cosine_answer
-                    self.title("Differences - Simple Lesk and Cosine Lesk")
+                    self.title("Comparison - Simple Lesk and Cosine Lesk")
                     self.setup_two_panes()
 
             if self.has_adapted_sense() and self.has_cosine_sense():
@@ -126,7 +126,7 @@ class DifferenceWindow(Tk):
                 else:
                     self.sense_1 = self.adapted_answer
                     self.sense_2 = self.cosine_answer
-                    self.title("Differences - Adapted Lesk and Cosine Lesk")
+                    self.title("Comparison - Adapted Lesk and Cosine Lesk")
                     self.setup_two_panes()
         else:
             self.setup_no_panes()
@@ -206,10 +206,10 @@ class DifferenceWindow(Tk):
                 definition_2 += "\n\n"
                 definition_3 += "\n\n"
 
-                if not definition_1 == definition_2 == definition_3:
-                    self.text_pane_1.insert(END, definition_1)
-                    self.text_pane_2.insert(END, definition_2)
-                    self.text_pane_3.insert(END, definition_3)
+                # if not definition_1 == definition_2 == definition_3:
+                self.text_pane_1.insert(END, definition_1)
+                self.text_pane_2.insert(END, definition_2)
+                self.text_pane_3.insert(END, definition_3)
 
             self.text_pane_3.config(state="disabled")
         else:
@@ -229,9 +229,9 @@ class DifferenceWindow(Tk):
                 definition_1 += "\n\n"
                 definition_2 += "\n\n"
 
-                if not definition_1 == definition_2:
-                    self.text_pane_1.insert(END, definition_1)
-                    self.text_pane_2.insert(END, definition_2)
+                #  if not definition_1 == definition_2:
+                self.text_pane_1.insert(END, definition_1)
+                self.text_pane_2.insert(END, definition_2)
 
         self.text_pane_1.config(state="disabled")
         self.text_pane_2.config(state="disabled")
