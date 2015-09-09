@@ -106,7 +106,7 @@ class ParaphrasingEngine:
             return word  # else, return the original word.
 
     def is_proper_noun(self, word):  # Decide if word is a proper noun or not.
-        if pywsd.utils.has_synset(word) or self.stop_word_dict.has_sense(word): # If present in WN or stopwords,
+        if pywsd.utils.has_synset(word) or self.stop_word_dict.has_sense(word):  # If present in WN or stopwords,
             return False  # Not a proper noun.
         else:
             return True  # Is a proper noun

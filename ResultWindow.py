@@ -1,5 +1,6 @@
 from Tkinter import *
 
+
 class ResultWindow(Tk):
 
     answer = None
@@ -27,7 +28,7 @@ class ResultWindow(Tk):
             print(self.answer[i])
             try:
                 definition += self.answer[i].definition()
-            except AttributeError:   # TODO: This is redundant.We already provide definitions for stopwords and such.
+            except AttributeError:
                 definition += self.answer[i]
             definition += "\n\n"
             text.insert(END, definition)
