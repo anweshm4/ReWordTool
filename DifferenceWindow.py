@@ -5,9 +5,8 @@ import tkMessageBox
 class DifferenceWindow(Tk):
 
     simple_answer = adapted_answer = cosine_answer = words = None
-    text = None
     text_pane_1 = text_pane_2 = text_pane_3 = None
-    has_three_panes = False
+    has_difference = False
     sense_1 = sense_2 = sense_3 = None
 
     def __init__(self, words, simple_answer, adapted_answer, cosine_answer):
@@ -17,6 +16,9 @@ class DifferenceWindow(Tk):
         self.adapted_answer = adapted_answer
         self.cosine_answer = cosine_answer
         self.setup_panes()
+
+        if self.has_difference:
+            self.show_differences()
         return
 
     def center(self):
@@ -38,7 +40,7 @@ class DifferenceWindow(Tk):
         return
 
     def setup_three_panes(self):
-        self.has_three_panes = True
+        self.has_difference = True
         self.geometry("980x650")
         self.resizable(width=FALSE, height=FALSE)
         self.center()
@@ -63,7 +65,7 @@ class DifferenceWindow(Tk):
         return
 
     def setup_two_panes(self):
-        self.has_three_panes = False
+        self.has_difference = True
         self.geometry("1000x650")
         self.resizable(width=FALSE, height=FALSE)
         self.center()
@@ -82,6 +84,7 @@ class DifferenceWindow(Tk):
         return
 
     def setup_no_panes(self):
+        self.has_difference = False
         self.geometry("0x0")
         self.resizable(width=FALSE, height=FALSE)
         self.center()
@@ -179,6 +182,60 @@ class DifferenceWindow(Tk):
     # SA AA, SA CA, AA CA
 
         de
+
+    def show_differences(self):
+        if self.has_three_sense_sets():
+            for i in range(len(self.sense_1)):
+                definition_1 = self.words[i]
+                definition_2 = self.words[i]
+                definition_3 = self.words[i]
+                definition_1 += ": "
+                definition_2 += ": "
+                definition_3 += ": "
+
+                try:
+                    definition_1 += self.sense_1[i].definition()
+                    definition_2 += self.sense_2[i].definition()
+                    definition_3 += self.sense_3[i].definition()
+                except AttributeError:
+                    definition_1 += self.sense_1[i]
+                    definition_2 += self.sense_2[i]
+                    definition_3 += self.sense_3[i]
+
+                definition_1 += "\n\n"
+                definition_2 += "\n\n"
+                definition_3 += "\n\n"
+
+                if not definition_1 == definition_2 == definition_3:
+                    self.text_pane_1.insert(END, definition_1)
+                    self.text_pane_2.insert(END, definition_2)
+                    self.text_pane_3.insert(END, definition_3)
+
+            self.text_pane_3.config(state="disabled")
+        else:
+            for i in range(len(self.sense_1)):
+                definition_1 = self.words[i]
+                definition_2 = self.words[i]
+                definition_1 += ": "
+                definition_2 += ": "
+
+                try:
+                    definition_1 += self.sense_1[i].definition()
+                    definition_2 += self.sense_2[i].definition()
+                except AttributeError:
+                    definition_1 += self.sense_1[i]
+                    definition_2 += self.sense_2[i]
+
+                definition_1 += "\n\n"
+                definition_2 += "\n\n"
+
+                if not definition_1 == definition_2:
+                    self.text_pane_1.insert(END, definition_1)
+                    self.text_pane_2.insert(END, definition_2)
+
+        self.text_pane_1.config(state="disabled")
+        self.text_pane_2.config(state="disabled")
+        return
 
     @staticmethod
     def same_senses_two(sense_1, sense_2):

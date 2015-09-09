@@ -295,7 +295,7 @@ class MainForm(Tk):
                 cosine_result = pe.disambiguate_cosine_lesk()
                 ResultWindow("Cosine Lesk", pe.words, cosine_result)
 
-            DifferenceWindow(input_string, simple_result, adapted_result, cosine_result)
+            DifferenceWindow(pe.words, simple_result, adapted_result, cosine_result)
 
             # print "#######################################################"
             # print original_result
