@@ -1,5 +1,6 @@
 from Tkinter import *
 
+
 class ResultWindow(Tk):
 
     answer = None

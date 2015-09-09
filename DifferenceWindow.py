@@ -1,39 +1,197 @@
 from Tkinter import *
-import tkFont
-import tkFileDialog
 import tkMessageBox
-import os
-import pywsd.utils
 
 
 class DifferenceWindow(Tk):
 
-    answer = None
-    words = None
+    simple_answer = adapted_answer = cosine_answer = words = None
+    text = None
+    text_pane_1 = text_pane_2 = text_pane_3 = None
+    has_three_panes = False
+    sense_1 = sense_2 = sense_3 = None
 
-    def __init__(self, words, original_answer, simple_answer, adapted_answer, cosine_answer):
+    def __init__(self, words, simple_answer, adapted_answer, cosine_answer):
         Tk.__init__(self)
-        self.answer = answer
         self.words = words
-        self.title(window_title)
-        self.initialize_ui()
+        self.simple_answer = simple_answer
+        self.adapted_answer = adapted_answer
+        self.cosine_answer = cosine_answer
+        self.setup_panes()
         return
 
-    def initialize_ui(self):
-        self.iconbitmap(default="PlaceholderIcon.ico")
-        self.geometry("600x300")
+    def center(self):
+        """
+        centers a tkinter window
+        :param self: the root or Toplevel window to center
+        """
+        self.update_idletasks()
+        width = self.winfo_width()
+        frm_width = self.winfo_rootx() - self.winfo_x()
+        win_width = width + 2 * frm_width
+        height = self.winfo_height()
+        titlebar_height = self.winfo_rooty() - self.winfo_y()
+        win_height = height + titlebar_height + frm_width
+        x = self.winfo_screenwidth() // 2 - win_width // 2
+        y = self.winfo_screenheight() // 2 - win_height // 2
+        self.geometry('{}x{}+{}+{}'.format(width, height, x, y))
+        self.deiconify()
+        return
+
+    def setup_three_panes(self):
+        self.has_three_panes = True
+        self.geometry("980x650")
         self.resizable(width=FALSE, height=FALSE)
-        text = Text(self, height=17, width=70, wrap=WORD)
-        text.place(x=15, y=10)
+        self.center()
 
-        for i in range(len(self.answer)):
-            definition = self.words[i]
-            definition += ": "
-            print(self.answer[i])
-            definition += self.answer[i].definition()
-            definition += "\n\n"
-            text.insert(END, definition)
+        scrollbar_1 = Scrollbar(self)
+        self.text_pane_1 = Text(self, height=45, width=33, wrap=WORD, yscrollcommand=scrollbar_1.set)
+        self.text_pane_1.pack(padx=10, pady=5, side=LEFT)
+        scrollbar_1.pack(side=LEFT, fill=Y)
+        scrollbar_1.config(command=self.text_pane_1.yview)
 
-        text.config(state="disabled")
+        scrollbar_2 = Scrollbar(self)
+        self.text_pane_2 = Text(self, height=45, width=33, wrap=WORD, yscrollcommand=scrollbar_2.set)
+        self.text_pane_2.pack(padx=25, pady=5, side=LEFT)
+        scrollbar_2.pack(padx=0, side=LEFT, fill=Y)
+        scrollbar_2.config(command=self.text_pane_2.yview)
+
+        scrollbar_3 = Scrollbar(self)
+        self.text_pane_3 = Text(self, height=45, width=33, wrap=WORD, yscrollcommand=scrollbar_3.set)
+        self.text_pane_3.pack(padx=25, pady=5, side=LEFT)
+        scrollbar_3.pack(padx=0, side=LEFT, fill=Y)
+        scrollbar_3.config(command=self.text_pane_3.yview)
         return
 
+    def setup_two_panes(self):
+        self.has_three_panes = False
+        self.geometry("1000x650")
+        self.resizable(width=FALSE, height=FALSE)
+        self.center()
+
+        scrollbar_1 = Scrollbar(self)
+        self.text_pane_1 = Text(self, height=45, width=55, wrap=WORD, yscrollcommand=scrollbar_1.set)
+        self.text_pane_1.pack(padx=10, pady=10, side=LEFT)
+        scrollbar_1.pack(side=LEFT, fill=Y)
+        scrollbar_1.config(command=self.text_pane_1.yview)
+
+        scrollbar_2 = Scrollbar(self)
+        self.text_pane_2 = Text(self, height=45, width=55, wrap=WORD, yscrollcommand=scrollbar_2.set)
+        self.text_pane_2.pack(padx=25, pady=10, side=LEFT)
+        scrollbar_2.pack(padx=0, side=LEFT, fill=Y)
+        scrollbar_2.config(command=self.text_pane_2.yview)
+        return
+
+    def setup_no_panes(self):
+        self.geometry("0x0")
+        self.resizable(width=FALSE, height=FALSE)
+        self.center()
+        tkMessageBox.showinfo("Information", "There aren't any differences to show.")
+        self.destroy()
+        return
+
+    def setup_panes(self):
+        if self.has_three_sense_sets():
+            if DifferenceWindow.same_senses_three(self.simple_answer, self.adapted_answer, self.cosine_answer):
+                self.setup_no_panes()
+            else:
+                self.sense_1 = self.simple_answer
+                self.sense_2 = self.adapted_answer
+                self.sense_3 = self.cosine_answer
+                self.title("Differences - Simple Lesk, Adapted Lesk and Cosine Lesk")
+                self.setup_three_panes()
+        elif self.has_two_sense_sets():
+            if self.has_simple_sense() and self.has_adapted_sense():
+                if DifferenceWindow.same_senses_two(self.simple_answer, self.adapted_answer):
+                    self.setup_no_panes()
+                else:
+                    self.sense_1 = self.simple_answer
+                    self.sense_2 = self.adapted_answer
+                    self.title("Differences - Simple Lesk and Adapted Lesk")
+                    self.setup_two_panes()
+            if self.has_simple_sense() and self.has_cosine_sense():
+                if DifferenceWindow.same_senses_two(self.simple_answer, self.cosine_answer):
+                    self.setup_no_panes()
+                else:
+                    self.sense_1 = self.simple_answer
+                    self.sense_2 = self.cosine_answer
+                    self.title("Differences - Simple Lesk and Cosine Lesk")
+                    self.setup_two_panes()
+
+            if self.has_adapted_sense() and self.has_cosine_sense():
+                if DifferenceWindow.same_senses_two(self.adapted_answer, self.cosine_answer):
+                    self.setup_no_panes()
+                else:
+                    self.sense_1 = self.adapted_answer
+                    self.sense_2 = self.cosine_answer
+                    self.title("Differences - Adapted Lesk and Cosine Lesk")
+                    self.setup_two_panes()
+        else:
+            self.setup_no_panes()
+        return
+
+    def has_two_sense_sets(self):
+        if (self.has_simple_sense() and self.has_adapted_sense()) or (self.has_simple_sense() and self.has_cosine_sense()) or (self.has_adapted_sense() and self.has_cosine_sense()):
+                return True
+        else:
+            return False
+
+    def has_three_sense_sets(self):  # Do we need three panes or two?
+        if self.has_simple_sense() and self.has_adapted_sense() and self.has_cosine_sense():
+            return True
+        else:
+            return False
+
+    def has_simple_sense(self):
+        try:
+            if len(self.simple_answer) > 0:
+                return True
+            else:
+                return False
+        except TypeError:
+            return False
+
+    def has_adapted_sense(self):
+        try:
+            if len(self.adapted_answer) > 0:
+                return True
+            else:
+                return False
+        except TypeError:
+            return False
+
+    def has_cosine_sense(self):
+        try:
+            if len(self.cosine_answer) > 0:
+                return True
+            else:
+                return False
+        except TypeError:
+            return False
+
+    # * Get all three sense-sets - simple, adapted and cosine.
+    # * Make sure at least two of them have 0+ senses.
+    #  (If not, then no need to compare)
+    # * Compare all senses.
+    #    If they are all equal
+    #        show "No differences"
+    #    else
+    #        show the differences.
+    # SA AA, SA CA, AA CA
+
+        de
+
+    @staticmethod
+    def same_senses_two(sense_1, sense_2):
+        all_same = True
+        for i in range(len(sense_1)):
+            if not (sense_1[i] == sense_2[i]):
+                all_same = False
+        return all_same
+
+    @staticmethod
+    def same_senses_three(sense_1, sense_2, sense_3):
+        all_same = True
+        for i in range(len(sense_1)):
+            if not (sense_1[i] == sense_2[i] == sense_3[i]):
+                all_same = False
+        return all_same

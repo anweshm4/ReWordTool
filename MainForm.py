@@ -9,6 +9,7 @@ import nltk
 from ParaphrasingEngine import ParaphrasingEngine
 from ResultWindow import ResultWindow
 from StopwordDictionary import StopWordDictionary
+from DifferenceWindow import DifferenceWindow
 
 
 class MainForm(Tk):
@@ -294,18 +295,19 @@ class MainForm(Tk):
                 cosine_result = pe.disambiguate_cosine_lesk()
                 ResultWindow("Cosine Lesk", pe.words, cosine_result)
 
-            print "#######################################################"
-            print original_result
+            DifferenceWindow(input_string, simple_result, adapted_result, cosine_result)
 
-            print "#######################################################"
-            print simple_result
-
-            print "#######################################################"
-            print adapted_result
-
-            print "#######################################################"
-            print cosine_result
-
+            # print "#######################################################"
+            # print original_result
+            #
+            # print "#######################################################"
+            # print simple_result
+            #
+            # print "#######################################################"
+            # print adapted_result
+            #
+            # print "#######################################################"
+            # print cosine_result
         return
 
     @staticmethod
