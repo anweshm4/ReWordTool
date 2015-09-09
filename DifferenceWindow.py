@@ -181,8 +181,6 @@ class DifferenceWindow(Tk):
     #        show the differences.
     # SA AA, SA CA, AA CA
 
-        de
-
     def show_differences(self):
         if self.has_three_sense_sets():
             for i in range(len(self.sense_1)):
@@ -206,10 +204,10 @@ class DifferenceWindow(Tk):
                 definition_2 += "\n\n"
                 definition_3 += "\n\n"
 
-                # if not definition_1 == definition_2 == definition_3:
-                self.text_pane_1.insert(END, definition_1)
-                self.text_pane_2.insert(END, definition_2)
-                self.text_pane_3.insert(END, definition_3)
+                if not definition_1 == definition_2 == definition_3:
+                    self.text_pane_1.insert(END, definition_1)
+                    self.text_pane_2.insert(END, definition_2)
+                    self.text_pane_3.insert(END, definition_3)
 
             self.text_pane_3.config(state="disabled")
         else:
@@ -229,9 +227,9 @@ class DifferenceWindow(Tk):
                 definition_1 += "\n\n"
                 definition_2 += "\n\n"
 
-                #  if not definition_1 == definition_2:
-                self.text_pane_1.insert(END, definition_1)
-                self.text_pane_2.insert(END, definition_2)
+                if not definition_1 == definition_2:
+                    self.text_pane_1.insert(END, definition_1)
+                    self.text_pane_2.insert(END, definition_2)
 
         self.text_pane_1.config(state="disabled")
         self.text_pane_2.config(state="disabled")
